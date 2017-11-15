@@ -3,6 +3,7 @@
 /.c9/*
 /test/*
 /auth/authConfig.js
+/routes/yelpKeys.js
 webpack.config.1.js
 webpack.config.p.js
 info.text

@@ -1,10 +1,11 @@
 // var qs = require('querystring');
 // var fetch = require('node-fetch');
 var Yelp = require('yelpv3');
+var yelpKeys = require('./yelpKeys.js');
 
 var yelp = new Yelp({
-  app_id: 'ZFHLmiZeCZpxvVE8-TDB9w',
-  app_secret: '2r3K8ikhEvIWdVnMUhh2UBgANyuHeXIkV03Drt4Mb6sl9KhyYYTDgq17hEWo9fyY'
+  app_id: yelpKeys.apiID,
+  app_secret: yelpKeys.appSecret
 });
 
 module.exports = function (app,passport,going) {
