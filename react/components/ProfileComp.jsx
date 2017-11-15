@@ -39,7 +39,8 @@ class ProfileComp extends React.Component {
             <strong>token</strong>: { user.github.token || null }<br />
         </p>
     </div>}
-    {(!user.github || !user.github) && <h3 class="text-center">Connect with soical account:</h3>}
+    <br />
+    {(!user.github || !user.google) && <h3 class="text-center">Connect with soical account:</h3>}
      <div className="text-center">
       {!user.google && <a href="/auth/google" target="_self" className="btn btn-danger"><span className="fa fa-google-plus"></span> Google+</a>}&nbsp;
      {!user.github  && <a href="/auth/github" target="_self"  className="btn btn-default">Github</a>}
