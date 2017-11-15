@@ -1,0 +1,183 @@
+import React from 'react';
+// import GoingComp from './goingComp.jsx';
+// import Infinite from 'react-infinite'
+// import CustomScroll from 'react-custom-scroll'
+// import List from 'react-virtualized/dist/commonjs/List'
+import Pagination from './PaginationCompRedux.jsx';
+export class SiblingResults extends React.Component {
+  //http://jasonwatmore.com/post/2017/03/14/react-pagination-example-with-logic-like-google
+    
+    render() {
+  var results = this.props.results || [];
+  const resultsList = results.map((result,index) => {
+        return (
+          <div className="myWell" key={index}>
+              <p><strong>{result.name}</strong> <span className="going" onClick={this.props.onUserClick.bind(this, result.id)} >Going {result.going || 0}</span></p>
+              <p>{result.location.address1}</p>
+          </div>
+        )
+      });
+      return (
+      <div>
+          {resultsList}
+      </div>
+      )
+    }
+  }
+export class SiblingResultsList extends React.Component {
+    constructor() {
+        super();
+
+        // an example array of items to be paged
+        var exampleItems = _.range(1, 151).map(i => { return { id: i, name: 'Item ' + i }; });
+
+        this.state = {
+            exampleItems: exampleItems,
+            pageOfItems: []
+        };
+
+        // bind function in constructor instead of render (https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
+        this.onChangePage = this.onChangePage.bind(this);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
+    }
+    onClick() {
+        // update state with new page of items
+         var exampleItems2 = _.range(200, 351).map(i => { return { id: i, name: 'Item ' + i }; });
+        this.setState({ exampleItems: exampleItems2 });
+    }
+
+    render() {
+       
+        return (
+            <div>
+                <div className="container">
+                    <div className="text-center">
+                        <h1>React - Pagination Example with logic like Google </h1>
+                        <button onClick={this.onClick}>Change</button>
+                        {this.state.pageOfItems.map(item =>
+                            <div key={item.id}>{item.name}</div>
+                        )}
+                        <Pagination items={this.state.exampleItems} onChangePage={this.onChangePage} />
+                    </div>
+                </div>
+                <hr />
+                <div className="credits text-center">
+                    <p>
+                        <a href="http://jasonwatmore.com/post/2017/03/14/react-pagination-example-with-logic-like-google" target="_top">React - Pagination Example with Logic like Google</a>
+                    </p>
+                    <p>
+                        <a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>
+                    </p>
+                </div>
+            </div>
+        );
+    }
+}
+export class SiblingResultsPages extends React.Component {
+    render() {
+     var resultsList = this.props.pageOfItems.map((result,index) => {
+            return (
+              <div className="myWell" key={index}>
+                  <p><strong>{result.name}</strong> <span className="going" onClick={this.props.onUserClick.bind(this, result.id)} >Going {result.going || 0}</span></p>
+                  <p>{result.location.address1}</p>
+              </div>
+            )
+          })
+      return (
+      <div >
+        
+          {this.props.results && resultsList}
+          {this.props.results && <div className="text-center"><Pagination 
+                                                                items={this.props.results}
+                                                                onChangePage={this.props.onChangePage} 
+                                                                />
+                                                                </div> }
+      </div>
+      )
+    }
+  }
+export class SiblingResultsPagesOld extends React.Component {
+  //http://jasonwatmore.com/post/2017/03/14/react-pagination-example-with-logic-like-google
+  constructor() {
+        super();
+ 
+        // an example array of items to be paged
+ 
+        this.state = {
+            // exampleItems: exampleItems,
+            pageOfItems: []
+        };
+ 
+        // bind function in constructor instead of render (https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
+        this.onChangePage = this.onChangePage.bind(this);
+    }
+ 
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
+    }  
+    render() {
+     var resultsList = this.state.pageOfItems.map((result,index) => {
+            return (
+              <div className="myWell" key={index}>
+                  <p><strong>{result.name}</strong> <span className="going" onClick={this.props.onUserClick.bind(this, result.id)} >Going {result.going || 0}</span></p>
+                  <p>{result.location.address1}</p>
+              </div>
+            )
+          })
+      return (
+      <div >
+        
+          {this.props.results && resultsList}
+          {this.props.results && <div className="text-center"><Pagination 
+                                                                items={this.props.results}
+                                                                onChangePage={this.onChangePage} 
+                                                                />
+                                                                </div> }
+      </div>
+      )
+    }
+  }
+// export class SiblingResultsList extends React.Component {
+//     render() {
+//   let results = this.props.results || [];
+//     function rowRenderer ({
+//       key,         // Unique key within array of rows
+//       index,       // Index of row within collection
+//       isScrolling, // The List is currently being scrolled
+//       isVisible,   // This row is visible within the List (eg it is not an overscanned row)
+//       style,        // Style object to be applied to row (to position it)
+//       }) {
+//       let resultsList =results[index]
+//       return (
+      
+//         <div className="myWell" key={key}>
+//             <p><strong>{resultsList.name}</strong><span className="going" onClick={this.props.onUserClick.bind(this, resultsList.id)} >Going {resultsList.going || 0}</span></p>
+//             <p>{resultsList.location.address1}</p>
+//         </div>
+//       )
+//       }
+//       const listStyle = {
+//         overflow: 'hidden',
+//       };
+//       return (
+     
+//       <div>
+//       <List
+//         width={window.innerWidth - (window.innerHeight/5)}
+//         height={window.innerHeight - (window.innerHeight/4)}
+//         rowCount={results.length}
+//         rowHeight={40}
+//         rowRenderer={ rowRenderer }
+//         style={listStyle}
+//       />,
+//       </div>
+      
+//       )
+//     }
+//   }

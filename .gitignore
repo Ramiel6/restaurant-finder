@@ -1,0 +1,8 @@
+/data/*
+/node_modules/*
+/.c9/*
+/test/*
+/auth/authConfig.js
+webpack.config.1.js
+webpack.config.p.js
+info.text
