@@ -65,7 +65,12 @@ app.post("/going",isLoggedIn, function(request, response){
     if(result.length > 0){
       
          if(result[0].users.includes(post.userId)){
-            response.status(400).end("Already here");
+            going.update({'locId': post.locId},{
+              $pull: { 'users': post.userId } 
+              },function (err,data) {
+              if (err) throw err;
+              response.end();
+            });
             
          }else{
            going.update({'locId': post.locId},{
